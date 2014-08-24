@@ -1,4 +1,6 @@
 pyChemometrics
 ==============
 
-Chemometrics tools based on NumPy (Python)
+Chemometrics tools for NumPy (Python)
+
+
