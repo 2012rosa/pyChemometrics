@@ -5,7 +5,7 @@ u"""
 
 
 
-def detrend(x, poly_order):
+def detrend(y, poly_order):
     u"""
     remove a trend data points have
     you can desinate polynominal order
@@ -17,18 +17,27 @@ def detrend(x, poly_order):
     [return]
         trend removed x
     """
-
-    index   = np.arange( len(x) )
-    coefs   = np.polyfit( index, x, poly_order )
+    y_      = y.copy()
+    index   = np.arange( len(y) )
+    coefs   = np.polyfit( index, y_, poly_order )[:-1]
     
     for order, coef in enumerate(reversed(coefs)):
-        for i in range(len(x)):
-            x[i] -= coef * pow( index[i], order )
-    
-    return x
+        for i in range(len(y_)):
+            y_[i] -= coef * pow( index[i], order )
+    return y_
 
 
 
 if __name__ == '__main__':
-    pass
-
+    
+    from fileio.jcamp import read
+    import matplotlib.pyplot as plt
+    
+    x, y            = read('../fileio/testdata/PE1800.DX')
+    after       = detrend(y, 1)
+    
+    plt.plot(x, y, '--')
+    plt.plot(x, after)
+    plt.show()
+    
+    

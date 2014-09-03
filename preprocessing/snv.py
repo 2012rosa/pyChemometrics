@@ -4,7 +4,7 @@ u"""
     SNV: normalizing
 """
 
-def snv(x):
+def snv(y):
     u"""
     centering to mean value 
     and normalized by standard deviation
@@ -13,14 +13,25 @@ def snv(x):
     [return]
         normalized x
     """
-
-    mean        = np.mean(x) 
-    sigma       = np.std(x)
-    x           = (x - mean) / sigma
+    y_      = y.copy()
+    mean    = np.mean(y_) 
+    sigma   = np.std(y_)
+    y_      = (y_ - mean) / sigma
    
-    return x 
+    return y_ 
 
     
 if __name__ == '__main__':
-    pass
 
+    from fileio.jcamp import read
+    import matplotlib.pyplot as plt
+    
+    x, y    = read('../fileio/testdata/PE1800.DX')
+    after   = snv(y)
+    
+    plt.subplot(211) 
+    plt.plot(x, y)
+    plt.subplot(212) 
+    plt.plot(x, after)
+    plt.show()
+    

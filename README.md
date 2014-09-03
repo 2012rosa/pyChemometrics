@@ -10,3 +10,11 @@ under construction...
 3. Validation
 
 
+1. PreProcessing tools
+	SNV, Savitzky-Golay, GapSegment, ...
+	
+2. Multivariate Regression algorithms
+	PLS1, PCR
+
+3. Validation tools
+	
