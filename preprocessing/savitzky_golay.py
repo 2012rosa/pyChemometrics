@@ -11,16 +11,6 @@ import math
 #def savitzky_golay_each_row( y, half_window, order, deriv ):
 def savgol( y, half_window=1, order=1, deriv=0 ):
     u"""
-    try:
-        window_size = np.abs(np.int(window_size))
-        order = np.abs(np.int(order))
-
-    except ValueError, msg:
-        raise ValueError("window_size and order have to be of type int")
-    if window_size % 2 != 1 or window_size < 1:
-        raise TypeError("window_size size must be a positive odd number")
-    if window_size < order + 2:
-        raise TypeError("window_size is too small for the polynomials order")
     """
     y_ = y.copy()
     
