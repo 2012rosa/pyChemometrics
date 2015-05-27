@@ -1,10 +1,26 @@
 # coding: utf-8
 import numpy as np
+from numpy.f2py.crackfortran import dimensionpattern
 u"""
     SNV: normalizing
 """
 
-def snv(y):
+
+def SNV(X):
+    
+    dim = len(X.shape)
+    if dim == 1:
+        return _snv(X) 
+    else:
+        X_ = X.copy()
+        for i, row_x in enumerate(X):
+            X_[i] = _snv(row_x)
+        
+        print X_.shape 
+        return X_ 
+
+ 
+def _snv(x):
     u"""
     centering to mean value 
     and normalized by standard deviation
@@ -13,12 +29,11 @@ def snv(y):
     [return]
         normalized x
     """
-    y_      = y.copy()
-    mean    = np.mean(y_) 
-    sigma   = np.std(y_)
-    y_      = (y_ - mean) / sigma
-   
-    return y_ 
+    x_      = x.copy()
+    mean    = np.mean(x_) 
+    sigma   = np.std(x_)
+    return    (x_ - mean) / sigma
+
 
     
 if __name__ == '__main__':
@@ -27,7 +42,8 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     
     x, y    = read('../fileio/testdata/PE1800.DX')
-    after   = snv(y)
+    after   = SNV(y)
+    print after
     
     plt.subplot(211) 
     plt.plot(x, y)
